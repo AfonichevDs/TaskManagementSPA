@@ -1,0 +1,67 @@
+<div class="max-w-lg mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Add New Task</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Task Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+          placeholder="Enter task name"
+        />
+        <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="text-red-500 text-sm">
+          Task name is required (max 50 characters).
+        </div>
+      </div>
+  
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2"
+          rows="4"
+          placeholder="Enter task description"
+        ></textarea>
+        <div *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched" class="text-red-500 text-sm">
+          Description is required (max 200 characters).
+        </div>
+      </div>
+  
+      <div>
+        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+        <select
+          id="status"
+          formControlName="status"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+        >
+          <option [value]="Status.NotStarted">Not Started</option>
+          <option [value]="Status.InProgress">In Progress</option>
+          <option [value]="Status.Completed">Completed</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="assignedTo" class="block text-sm font-medium text-gray-700">Assigned To</label>
+        <input
+          type="text"
+          id="assignedTo"
+          formControlName="assignedTo"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2"
+          placeholder="Enter assignee name"
+        />
+        <div *ngIf="taskForm.get('assignedTo')?.invalid && taskForm.get('assignedTo')?.touched" class="text-red-500 text-sm">
+          Assignee is required.
+        </div>
+      </div>
+  
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow hover:bg-indigo-700"
+        [disabled]="taskForm.invalid"
+      >
+        Add Task
+      </button>
+    </form>
+  </div>
